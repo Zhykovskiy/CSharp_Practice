@@ -20,7 +20,8 @@ namespace Calculator
 
         public static double GetTriangleSquare(double a, double b, int alpha)
         {
-            return 0.5 * a * b * Math.Sin(alpha);
+            double rads = alpha * Math.PI / 180;
+            return 0.5 * a * b * Math.Sin(rads);
         }
     }
 }
