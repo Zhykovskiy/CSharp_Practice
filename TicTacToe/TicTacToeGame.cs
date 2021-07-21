@@ -6,22 +6,10 @@ using System.Threading.Tasks;
 
 namespace TicTacToe
 {
-    public enum State
-    {
-        Cross,
-        Zero,
-        Unset
-    }
-    public enum Winner
-    {
-        Crosses,
-        Zeros,
-        Draw,
-        GameIsUnfinished
-    }
     class TicTacToeGame
     {
         private readonly State[] board = new State[9];
+
         public int MovesCounter { get; private set; }
 
         public TicTacToeGame()
