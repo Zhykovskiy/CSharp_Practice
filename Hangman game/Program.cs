@@ -14,7 +14,7 @@ namespace Hangman_game
             Console.WriteLine($"The word consist of {word.Length} letters");
             Console.WriteLine("Try to guess the word");
 
-            while(game.GameStatus == GameStatus.InProgress)
+            while (game.GameStatus == GameStatus.InProgress)
             {
                 Console.WriteLine("Pick a letter");
                 char c = Console.ReadLine().ToCharArray()[0];
@@ -30,7 +30,7 @@ namespace Hangman_game
                     Console.WriteLine("You're hanged.");
                     Console.WriteLine($"The word was: {game.Word}");
                 }
-                else if(game.GameStatus == GameStatus.Won)
+                else if (game.GameStatus == GameStatus.Won)
                 {
                     Console.WriteLine("You won!");
                 }
