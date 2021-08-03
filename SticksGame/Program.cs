@@ -21,6 +21,8 @@ namespace SticksGame
                     else Console.WriteLine("You lost :(");
                 }
             }
+
+            Console.ReadLine();
         }
     }
 }
