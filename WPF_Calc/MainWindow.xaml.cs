@@ -33,7 +33,7 @@ namespace WPF_Calc
             Button button = (Button)sender;
             String str = button.Content.ToString();
             int num = Int32.Parse(str);
-            if(operation == "")
+            if (operation == "")
             {
                 num1 = num1 * 10 + num;
                 txtValue.Text = num1.ToString();
@@ -48,8 +48,7 @@ namespace WPF_Calc
         private void btn_operation_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            String str = button.Content.ToString();
-            operation = str;
+            operation = button.Content.ToString();
             txtValue.Text = "";
         }
 
@@ -70,8 +69,19 @@ namespace WPF_Calc
                 case "/":
                     result = num1 / num2;
                     break;
-                default:
+                case "min":
+                    result = Math.Min(num1, num2);
                     break;
+                case "max":
+                    result = Math.Max(num1, num2);
+                    break;
+                case "avg":
+                    result = (num1 + num2) / 2;
+                    break;
+                case "x^y":
+                    result = (int)Math.Pow(num1, num2);
+                    break;
+
             }
             txtValue.Text = result.ToString();
             operation = "";
