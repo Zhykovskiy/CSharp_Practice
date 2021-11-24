@@ -45,9 +45,11 @@ namespace WPF_Calc
             }
         }
 
-        private void btn_plus_Click(object sender, RoutedEventArgs e)
+        private void btn_operation_Click(object sender, RoutedEventArgs e)
         {
-            operation = "+";
+            Button button = (Button)sender;
+            String str = button.Content.ToString();
+            operation = str;
             txtValue.Text = "";
         }
 
@@ -58,6 +60,15 @@ namespace WPF_Calc
             {
                 case "+":
                     result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    result = num1 / num2;
                     break;
                 default:
                     break;
