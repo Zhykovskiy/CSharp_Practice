@@ -19,7 +19,7 @@ namespace SticksGame
             
             player = !player;
             
-            return !player;
+            return player;
         }
 
         private int PlayerMove()
