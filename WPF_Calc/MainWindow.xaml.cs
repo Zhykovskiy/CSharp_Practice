@@ -37,9 +37,17 @@ namespace WPF_Calc
 
         private void btn_operation_Click(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            operation = button.Content.ToString();
-            txtValue.Text = "";
+            if(num2 == 0)
+            {
+                Button button = (Button)sender;
+                operation = button.Content.ToString();
+            }
+            else
+            {
+                btn_eq_Click(sender, e);
+                btn_operation_Click(sender, e);
+            }
+            
         }
 
         private void btn_eq_Click(object sender, RoutedEventArgs e)
