@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace WPF_Calc
 {
@@ -87,6 +77,49 @@ namespace WPF_Calc
             operation = "";
             num1 = result;
             num2 = 0;
+        }
+        private void btn_C_Click(object sender, RoutedEventArgs e)
+        {
+            num1 = 0;
+            num2 = 0;
+            operation = "";
+            txtValue.Text = "";
+        }
+
+        private void btn_CE_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "") num1 = 0;
+            else num2 = 0;
+
+            txtValue.Text = "0";
+        }
+
+        private void btn_backspace_Click(object sender, RoutedEventArgs e)
+        {
+            if (operation == "")
+            {
+                num1 /= 10;
+                txtValue.Text = num1.ToString();
+            }
+            else
+            {
+                num2 /= 10;
+                txtValue.Text = num2.ToString();
+            }
+        }
+
+        private void btn_plusminus_Click(object sender, RoutedEventArgs e)
+        {
+            if(operation == "")
+            {
+                num1 *= -1;
+                txtValue.Text = num1.ToString();
+            }
+            else
+            {
+                num2 *= -1;
+                txtValue.Text = num2.ToString();
+            }
         }
     }
 }
