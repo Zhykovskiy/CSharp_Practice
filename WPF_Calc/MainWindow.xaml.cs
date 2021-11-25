@@ -86,6 +86,7 @@ namespace WPF_Calc
             txtValue.Text = result.ToString();
             operation = "";
             num1 = result;
+            num2 = 0;
         }
     }
 }
