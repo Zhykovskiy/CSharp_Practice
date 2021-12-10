@@ -5,18 +5,19 @@ namespace Tetris
 {
     class Program
     {
+        const int TIMER_INTERVAL = 500;
+        private static System.Timers.Timer timer;
+
         static FigureGenerator generator;
         static Figure currentFigure;
-        private static System.Timers.Timer aTimer;
         static void Main(string[] args)
         {
-            SetTimer();
-
             Console.SetWindowSize(Field.Width, Field.Height);
             Console.SetBufferSize(Field.Width, Field.Height);
 
             generator = new FigureGenerator(Field.Width / 2, 0, Drawer.DEFAULT_SYMBOL);
             currentFigure = generator.GetNewFigure();
+            SetTimer();
 
             while (true)
             {
@@ -31,10 +32,10 @@ namespace Tetris
 
         private static void SetTimer()
         {
-            aTimer = new System.Timers.Timer(400);
-            aTimer.Elapsed += FallingFigure;
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
+            timer = new System.Timers.Timer(TIMER_INTERVAL);
+            timer.Elapsed += FallingFigure;
+            timer.AutoReset = true;
+            timer.Enabled = true;
         }
 
         private static void FallingFigure(object sender, ElapsedEventArgs e)
