@@ -1,4 +1,6 @@
-﻿namespace Tetris
+﻿using System;
+
+namespace Tetris
 {
     abstract class Figure
     {
@@ -83,6 +85,11 @@
 
             Draw();
             return result;
+        }
+
+        internal bool IsOnTop()
+        {
+            return Points[0].Y == 0;
         }
 
         public abstract void Rotate(Point[] pList);

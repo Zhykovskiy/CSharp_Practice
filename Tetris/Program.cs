@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Timers;
 
 namespace Tetris
@@ -7,6 +8,7 @@ namespace Tetris
     {
         const int TIMER_INTERVAL = 500;
         private static System.Timers.Timer timer;
+        static private Object _lockedObject = new object();
 
         static FigureGenerator generator;
         static Figure currentFigure;
@@ -24,8 +26,10 @@ namespace Tetris
                 if (Console.KeyAvailable)
                 {
                     var key = Console.ReadKey();
+                    Monitor.Enter(_lockedObject); 
                     var result = HandleKey(currentFigure, key.Key);
                     ProcessResult(result, ref currentFigure);
+                    Monitor.Exit(_lockedObject);
                 }
             }
         }
@@ -40,8 +44,10 @@ namespace Tetris
 
         private static void FallingFigure(object sender, ElapsedEventArgs e)
         {
+            Monitor.Enter(_lockedObject);
             var result = currentFigure.TryMove(Direction.DOWN);
             ProcessResult(result, ref currentFigure);
+            Monitor.Exit(_lockedObject);
         }
 
         private static bool ProcessResult(Result result, ref Figure currentFigure)
@@ -50,11 +56,27 @@ namespace Tetris
             {
                 Field.AddFigure(currentFigure);
                 Field.TryDeleteLines();
-                currentFigure = generator.GetNewFigure();
-                return true;
+
+                if (currentFigure.IsOnTop())
+                {
+                    WriteGameOver();
+                    timer.Elapsed -= FallingFigure;
+                    return true;
+                }
+                else
+                {
+                    currentFigure = generator.GetNewFigure();
+                    return true;
+                }
             }  
             else
                 return false;
+        }
+
+        private static void WriteGameOver()
+        {
+            Console.SetCursorPosition(Field.Width / 2 - 8, Field.Height / 2);
+            Console.WriteLine("G A M E   OVER");
         }
 
         private static Result HandleKey(Figure currentFigure, ConsoleKey key)
