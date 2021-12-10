@@ -30,6 +30,7 @@ namespace Tetris
             if (result == Result.HEAP_STRIKE || result == Result.DOWN_BORDER_STRIKE)
             {
                 Field.AddFigure(currentFigure);
+                Field.TryDeleteLines();
                 currentFigure = generator.GetNewFigure();
                 return true;
             }  

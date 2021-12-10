@@ -44,6 +44,56 @@ namespace Tetris
             }
         }
 
+        internal static void TryDeleteLines()
+        {
+            for (int i = 0; i < Height; i++)
+            {
+                int counter = 0;
+
+                for (int j = 0; j < Width; j++)
+                {
+                    if (_heap[i][j]) 
+                        counter++;
+                     if(counter == Width)
+                    {
+                        DeleteLine(i);
+                        Redraw();
+                    }
+                        
+                }
+            }
+        }
+
+        private static void Redraw()
+        {
+            
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    if (_heap[i][j]) 
+                        Console.Write('*');
+                    else 
+                        Console.Write(' ');
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private static void DeleteLine(int line)
+        {
+            for (int i = line; i >=0; i--)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    if (i == 0)
+                        _heap[i][j] = false;
+                    else
+                        _heap[i][j] = _heap[i - 1][j];
+                }
+            }
+        }
+
         public static bool CheckStrike(Point p)
         {
             return _heap[p.Y][p.X];
