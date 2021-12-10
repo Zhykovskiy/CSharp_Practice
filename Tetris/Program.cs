@@ -1,18 +1,22 @@
 ﻿using System;
-using System.Threading;
+using System.Timers;
 
 namespace Tetris
 {
     class Program
     {
         static FigureGenerator generator;
+        static Figure currentFigure;
+        private static System.Timers.Timer aTimer;
         static void Main(string[] args)
         {
+            SetTimer();
+
             Console.SetWindowSize(Field.Width, Field.Height);
             Console.SetBufferSize(Field.Width, Field.Height);
 
             generator = new FigureGenerator(Field.Width / 2, 0, Drawer.DEFAULT_SYMBOL);
-            Figure currentFigure = generator.GetNewFigure();
+            currentFigure = generator.GetNewFigure();
 
             while (true)
             {
@@ -23,6 +27,20 @@ namespace Tetris
                     ProcessResult(result, ref currentFigure);
                 }
             }
+        }
+
+        private static void SetTimer()
+        {
+            aTimer = new System.Timers.Timer(400);
+            aTimer.Elapsed += FallingFigure;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
+        }
+
+        private static void FallingFigure(object sender, ElapsedEventArgs e)
+        {
+            var result = currentFigure.TryMove(Direction.DOWN);
+            ProcessResult(result, ref currentFigure);
         }
 
         private static bool ProcessResult(Result result, ref Figure currentFigure)
