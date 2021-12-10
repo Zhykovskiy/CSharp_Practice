@@ -76,28 +76,23 @@ namespace Tetris
         private static void WriteGameOver()
         {
             Console.SetCursorPosition(Field.Width / 2 - 8, Field.Height / 2);
-            Console.WriteLine("G A M E   OVER");
+            Console.WriteLine("G A M E   O V E R");
         }
 
         private static Result HandleKey(Figure currentFigure, ConsoleKey key)
         {
-            Result result = Result.SUCCESS;
             switch (key)
             {
                 case ConsoleKey.LeftArrow:
-                    result = currentFigure.TryMove(Direction.LEFT);
-                    break;
+                    return currentFigure.TryMove(Direction.LEFT);
                 case ConsoleKey.RightArrow:
-                    result = currentFigure.TryMove(Direction.RIGHT);
-                    break;
+                    return currentFigure.TryMove(Direction.RIGHT);
                 case ConsoleKey.DownArrow:
-                    result = currentFigure.TryMove(Direction.DOWN);
-                    break;
+                    return currentFigure.TryMove(Direction.DOWN);
                 case ConsoleKey.Spacebar:
-                    result = currentFigure.TryRotate();
-                    break;
+                    return currentFigure.TryRotate();
             }
-            return result;
+            return Result.SUCCESS;
         }
     }
 }

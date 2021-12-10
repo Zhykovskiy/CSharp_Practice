@@ -5,7 +5,6 @@ namespace Tetris
     public static class Drawer
     {
         public const char DEFAULT_SYMBOL = '*';
-
         public static void DrawPoint(int x, int y, char c = DEFAULT_SYMBOL)
         {
             Console.SetCursorPosition(x, y);

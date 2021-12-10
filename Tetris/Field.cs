@@ -66,7 +66,6 @@ namespace Tetris
 
         private static void Redraw()
         {
-
             for (int i = 0; i < Height; i++)
             {
                 for (int j = 0; j < Width; j++)
@@ -76,7 +75,6 @@ namespace Tetris
                     else
                         Drawer.HidePoint(j, i);
                 }
-                Console.WriteLine();
             }
         }
 
