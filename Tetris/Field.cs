@@ -4,8 +4,8 @@ namespace Tetris
 {
     static class Field
     {
-        private static int _width = 40;
-        private static int _height = 30;
+        private static int _width = 20;
+        private static int _height = 20;
         public static int Width
         {
             get
@@ -52,29 +52,29 @@ namespace Tetris
 
                 for (int j = 0; j < Width; j++)
                 {
-                    if (_heap[i][j]) 
+                    if (_heap[i][j])
                         counter++;
-                     if(counter == Width)
+                    if (counter == Width)
                     {
                         DeleteLine(i);
                         Redraw();
                     }
-                        
+
                 }
             }
         }
 
         private static void Redraw()
         {
-            
+
             for (int i = 0; i < Height; i++)
             {
                 for (int j = 0; j < Width; j++)
                 {
-                    if (_heap[i][j]) 
-                        Console.Write('*');
-                    else 
-                        Console.Write(' ');
+                    if (_heap[i][j])
+                        Drawer.DrawPoint(j, i);
+                    else
+                        Drawer.HidePoint(j, i);
                 }
                 Console.WriteLine();
             }
@@ -82,7 +82,7 @@ namespace Tetris
 
         private static void DeleteLine(int line)
         {
-            for (int i = line; i >=0; i--)
+            for (int i = line; i >= 0; i--)
             {
                 for (int j = 0; j < Width; j++)
                 {
