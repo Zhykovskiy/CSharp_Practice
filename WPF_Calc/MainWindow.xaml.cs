@@ -13,6 +13,7 @@ namespace WPF_Calc
         double num1 = 0;
         double num2 = 0;
         string operation = "";
+        
         public MainWindow()
         {
             InitializeComponent();
