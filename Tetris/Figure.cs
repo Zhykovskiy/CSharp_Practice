@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tetris
+﻿namespace Tetris
 {
     abstract class Figure
     {
@@ -14,6 +12,7 @@ namespace Tetris
                 p.Draw();
             }
         }
+
         internal Result TryMove(Direction dir)
         {
             Hide();

@@ -6,7 +6,6 @@ namespace Tetris
     class Program
     {
         static FigureGenerator generator;
-        Figure currentFigure;
         static void Main(string[] args)
         {
             Console.SetWindowSize(Field.Width, Field.Height);
@@ -40,22 +39,23 @@ namespace Tetris
 
         private static Result HandleKey(Figure currentFigure, ConsoleKey key)
         {
+            Result result = Result.SUCCESS;
             switch (key)
             {
                 case ConsoleKey.LeftArrow:
-                    currentFigure.TryMove(Direction.LEFT);
+                    result = currentFigure.TryMove(Direction.LEFT);
                     break;
                 case ConsoleKey.RightArrow:
-                    currentFigure.TryMove(Direction.RIGHT);
+                    result = currentFigure.TryMove(Direction.RIGHT);
                     break;
                 case ConsoleKey.DownArrow:
-                    currentFigure.TryMove(Direction.DOWN);
+                    result = currentFigure.TryMove(Direction.DOWN);
                     break;
                 case ConsoleKey.Spacebar:
-                    currentFigure.TryRotate();
+                    result = currentFigure.TryRotate();
                     break;
             }
-            return Result.SUCCESS;
+            return result;
         }
     }
 }
